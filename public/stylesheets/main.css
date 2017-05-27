@@ -1,0 +1,8 @@
+
+/* Padding for body, to avoid navbar-fixed-top overlapping iwth body
+http://stackoverflow.com/questions/11124777/twitter-bootstrap-navbar-fixed-top-overlapping-site
+*/
+body { padding-top: 45px; }
+@media screen and (max-width: 768px) {
+    body { padding-top: 0px; }
+}

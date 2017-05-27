@@ -1,0 +1,24 @@
+# Application name
+application.name = Catalogue des produits
+
+# Messages for Details page
+ean = EAN
+name = Nom
+description = Descriptif
+products.details = Produit: {0}
+
+# Messages for New Product page
+products.form = Dètails du produit
+products.new = (nouveau)
+products.new.command = Ajouter
+products.new.submit = Ajouter
+products.new.success = Produit {0} ajouté.
+
+# Messages for the Edit Product page
+products.edit = (existant)
+products.edit.command = Éditer
+products.edit.submit = Réactualiser
+products.edit.success = Produit {0} mis à jour.
+
+validation.errors = Veuillez corriger les erreurs sur le formulaire
+validation.ean.duplicate = Un produit avec ce code EAN existe déjà

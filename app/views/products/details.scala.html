@@ -1,0 +1,30 @@
+@import play.api.Configuration
+
+@(product: Product)(implicit flash: Flash, lang: Lang, messages: Messages, config: Configuration)
+
+@main(Messages("products.details", product.name)) {
+  <h2 class="pull-right" >
+    @tags.barcode(product.ean)
+  </h2>
+  <h2>
+    @Messages("products.details", product.name)
+  </h2>
+
+  <dl class="dl-horizontal">
+    <dt>@Messages("ean"):</dt>
+    <dd>@product.ean</dd>
+
+    <dt>@Messages("name"):</dt>
+    <dd>@product.name</dd>
+
+    <dt>@Messages("description"):</dt>
+    <dd>@product.description</dd>
+  </dl>
+
+  @* BUTTON TO EDIT PRODUCT *@
+  <p>
+    <a href="@controllers.routes.Products.editProduct(product.ean)" class="btn">
+      <i class="icon-plus"></i> @Messages("products.edit.command")
+    </a>
+  </p>
+}

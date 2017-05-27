@@ -1,0 +1,63 @@
+@*
+ * This template is called from the `index` template. This template
+ * handles the rendering of the page header and body tags. It takes
+ * two arguments, a `String` for the title of the page and an `Html`
+ * object to insert into the body of the page.
+ * ALSO ADDED IN THIS EXAMPLE: implicit lang PARAMETER
+ *
+ * IMPORTANT (FROM THE EXAMPLE APP):
+ * The main purpose of this template is to provide a reusable structure for HTML
+ * pages in the application, with a common layout. The dynamic page-specific
+ * parts are where the page title and page contents are output.
+ * Most of the contents of this template are taken up by the HTML structure for
+ * Twitter Bootstrap, which we’ll use to style the output.
+ *@
+
+@import play.api.Configuration
+
+@(title: String)(content: Html)(implicit flash: Flash, lang: Lang, messages: Messages, config: Configuration)
+
+<!DOCTYPE html>
+<html>
+  <head>
+      @* Here's where we render the page title `String`. *@
+      <title>@title</title>
+      <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap.css")">
+      <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+  </head>
+  <body>
+  @* And here's where we render the `Html` object containing the page content.*@
+  <div class="screenshot">
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="@routes.Application.index()">
+            @Messages("application.name")
+          </a>
+        </div>
+      </div>
+    </div>
+
+    @* CONTENT GOES HERE *@
+    <div class="container">
+
+      @* Show success message, if present *@
+      @if(flash.get("success").isDefined){
+        <div class="alert alert-success">
+          @flash.get("success")
+        </div>
+      }
+      @* Show error message, if present *@
+      @if(flash.get("error").isDefined){
+        <div class="alert alert-error">
+          @flash.get("error")
+        </div>
+      }
+
+      @content
+      @debug()
+    </div>
+  </div>
+  </body>
+</html>
