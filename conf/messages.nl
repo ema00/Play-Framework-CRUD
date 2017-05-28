@@ -18,7 +18,8 @@ products.new.success = Product {0} toegevoegd.
 products.edit = (bestaand)
 products.edit.command = Verandering
 products.edit.submit = Bijwerken
-products.edit.success = Product {0} gewijzigd.
+products.edit.success = Artikel {0} gewijzigd.
+products.edit.notfound = Artikel niet gevonden.
 
 validation.errors = Corrigeer de fouten in het formulier
 validation.ean.duplicate = Er bestaat al een product met dit EAN

@@ -19,6 +19,7 @@ products.edit = (existent)
 products.edit.command = Edit
 products.edit.submit = Update
 products.edit.success = Successfully updated product {0}.
+products.edit.notfound = Product not found.
 
 validation.errors = Please correct the errors in the form.
 validation.ean.duplicate = A product with this EAN code already exists

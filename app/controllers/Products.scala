@@ -84,7 +84,7 @@ class Products @Inject() (val messagesApi: MessagesApi, implicit val config: Con
   /* SHOW FORM FOR EDITING AN EXISTING PRODUCT */
   def editProduct(ean: Long) = Action { implicit request =>
     Product.findByEan(ean) match {
-      case None => NotFound
+      case None => BadRequest(Messages("products.edit.notfound"))
       case some =>
         val product = some.get
         val form = productForm.fill(product)
@@ -102,10 +102,12 @@ class Products @Inject() (val messagesApi: MessagesApi, implicit val config: Con
       },
       success = { updatedProduct =>
       Product.findByEan(ean) match {
-        case some =>Product.remove(some.get)
-        Product.add(updatedProduct)
-        val message = Messages("products.edit.success", updatedProduct.name)
-        Redirect(routes.Products.show(updatedProduct.ean)).flashing("success" -> message)
+        case None => BadRequest(Messages("products.edit.notfound"))
+        case some =>
+          Product.remove(some.get)
+          Product.add(updatedProduct)
+          val message = Messages("products.edit.success", updatedProduct.name)
+          Redirect(routes.Products.show(updatedProduct.ean)).flashing("success" -> message)
         }
       }
     )

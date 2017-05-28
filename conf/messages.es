@@ -19,6 +19,7 @@ products.edit = (existente)
 products.edit.command = Editar
 products.edit.submit = Guardar
 products.edit.success = Producto {0} actualizado.
+products.edit.notfound = Producto no encontrado.
 
 validation.errors = Corrija los errores en el formulario.
 validation.ean.duplicate = Ya existe un producto con este EAN
