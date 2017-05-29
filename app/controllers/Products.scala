@@ -50,7 +50,7 @@ class Products @Inject() (val messagesApi: MessagesApi, implicit val config: Con
   /* SHOW DETAILS OF A PRODUCT IN details OBJECT IN FOLDER wiews\products */
   def show(ean: Long) = Action { implicit request =>
     Product.findByEan(ean) match {
-      case None => NotFound
+      case None => BadRequest(Messages("products.edit.notfound"))   //NotFound
       case some: Option[Product] => Ok(views.html.products.details(some.get))
     }
   }
@@ -101,16 +101,28 @@ class Products @Inject() (val messagesApi: MessagesApi, implicit val config: Con
           ("error" -> Messages("validation.errors")))
       },
       success = { updatedProduct =>
-      Product.findByEan(ean) match {
-        case None => BadRequest(Messages("products.edit.notfound"))
-        case some =>
-          Product.remove(some.get)
-          Product.add(updatedProduct)
-          val message = Messages("products.edit.success", updatedProduct.name)
-          Redirect(routes.Products.show(updatedProduct.ean)).flashing("success" -> message)
+        Product.findByEan(ean) match {
+          case None => BadRequest(Messages("products.edit.notfound"))
+          case some =>
+            Product.remove(some.get)
+            Product.add(updatedProduct)
+            val message = Messages("products.edit.success", updatedProduct.name)
+            Redirect(routes.Products.show(updatedProduct.ean)).flashing("success" -> message)
         }
       }
     )
+  }
+
+  /* REMOVING AN EXISTING PRODUCT */
+  def remove(ean: Long) = Action { implicit request =>
+    Product.findByEan(ean) match {
+      case None => BadRequest(Messages("products.edit.notfound"))
+      case some =>
+        val product = some.get
+        Product.remove(product)
+        val message = Messages("products.remove.success", product.name)
+        Redirect(routes.Products.list()).flashing("success" -> message)
+    }
   }
 
 }

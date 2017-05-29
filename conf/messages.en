@@ -21,5 +21,9 @@ products.edit.submit = Update
 products.edit.success = Successfully updated product {0}.
 products.edit.notfound = Product not found.
 
+# Messages for the Remove Product Page
+products.remove.command = Removed
+products.remove.success = Product {0} removed.
+
 validation.errors = Please correct the errors in the form.
 validation.ean.duplicate = A product with this EAN code already exists

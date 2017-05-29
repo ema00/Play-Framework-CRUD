@@ -16,6 +16,9 @@ GET     /products/new              controllers.Products.newProduct
 GET     /products/edit             controllers.Products.editProduct(ean: Long)
 POST    /products/update           controllers.Products.update(ean: Long)
 
+# REMOVE PRODUCT
+POST    /products/remove           controllers.Products.remove(ean: Long)
+
 # THE PRODUCT DETAILS
 GET     /products/:ean              controllers.Products.show(ean: Long)
 

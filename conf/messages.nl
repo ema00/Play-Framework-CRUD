@@ -21,5 +21,9 @@ products.edit.submit = Bijwerken
 products.edit.success = Artikel {0} gewijzigd.
 products.edit.notfound = Artikel niet gevonden.
 
+# Messages for the Remove Product Page
+products.remove.command = Verwijderen
+products.remove.success = Artikel {0} verwijderd.
+
 validation.errors = Corrigeer de fouten in het formulier
 validation.ean.duplicate = Er bestaat al een product met dit EAN
