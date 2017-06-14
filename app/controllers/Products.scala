@@ -67,17 +67,21 @@ class Products @Inject() (val messagesApi: MessagesApi, implicit val config: Con
 
   /* SAVING A NEW PRODUCT, AND VALIDATION OF USER INPUT IN NEW PRODUCT FORM */
   def save = Action { implicit request =>
+    def showErrors(form: Form[Product]) = {
+      Redirect(routes.Products.newProduct()).flashing(Flash(form.data) +
+      ("error" -> Messages("validation.errors")))
+    }
+
+    def saveAndShow(newProduct: Product) = {
+      Product.add(newProduct)
+      val message = Messages("products.new.success", newProduct.name)
+      Redirect(routes.Products.show(newProduct.ean)).flashing("success" -> message)
+    }
+
     val newProductForm = productNewForm.bindFromRequest()
     newProductForm.fold(
-      hasErrors = { form =>
-        Redirect(routes.Products.newProduct()).flashing(Flash(form.data) +
-          ("error" -> Messages("validation.errors")))
-      },
-      success = { newProduct =>
-        Product.add(newProduct)
-        val message = Messages("products.new.success", newProduct.name)
-        Redirect(routes.Products.show(newProduct.ean)).flashing("success" -> message)
-      }
+      hasErrors = { form => showErrors(form) },
+      success = { newProduct => saveAndShow(newProduct) }
     )
   }
 
@@ -94,20 +98,24 @@ class Products @Inject() (val messagesApi: MessagesApi, implicit val config: Con
 
   /* SAVING AN UPDATED PRODUCT, AND VALIDATION OF USER INPUT IN FORM */
   def update(ean: Long) = Action { implicit request =>
+    def showErrors(form: Form[Product]) = {
+      Redirect(routes.Products.editProduct(ean)).flashing(Flash(form.data) +
+      ("error" -> Messages("validation.errors")))
+    }
+
+    def updateAndShow(updatedProduct: Product) = {
+      Product.update(updatedProduct) match {
+        case None => BadRequest(Messages("products.edit.notfound"))
+        case some =>
+          val message = Messages("products.edit.success", updatedProduct.name)
+          Redirect(routes.Products.show(updatedProduct.ean)).flashing("success" -> message)
+      }
+    }
+
     val updatedProductForm = productForm.bindFromRequest()
     updatedProductForm.fold(
-      hasErrors = { form =>
-        Redirect(routes.Products.editProduct(ean)).flashing(Flash(form.data) +
-          ("error" -> Messages("validation.errors")))
-      },
-      success = { updatedProduct =>
-        Product.update(updatedProduct) match {
-          case None => BadRequest(Messages("products.edit.notfound"))
-          case some =>
-            val message = Messages("products.edit.success", updatedProduct.name)
-            Redirect(routes.Products.show(updatedProduct.ean)).flashing("success" -> message)
-        }
-      }
+      hasErrors = { form => showErrors(form) },
+      success = { updatedProduct => updateAndShow(updatedProduct) }
     )
   }
 
