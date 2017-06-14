@@ -26,4 +26,20 @@ object Product {
 
   def remove(product: Product) = { products = products - product }
 
+  /*
+  * Updates product.
+  * Postcondition: Returns an Option, Some[Product] updated product in case
+  * product exists, or None in case product doesn't exist. Doesn't create a new
+  * product if product doesn't exist previously.
+  */
+  def update(product: Product) = {
+    products.find(p => p.ean == product.ean) match {
+      case None => None
+      case some =>
+        val current = some.get
+        products = products - current + product
+        Some(product)
+    }
+  }
+
 }

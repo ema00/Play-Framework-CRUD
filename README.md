@@ -1,14 +1,14 @@
-Products CRUD - Play Framework 2.4
-==================================
+CRUD MVC Application - Play Framework 2.4
+=========================================
 
-  Simple Play Framework 2.4 application to implement CRUD operations on a class Product.
-  Shows how template composition is possible in Play Framework.
-  Uses dependency injection to inject configuration into controllers.
-  Implements Internationalization.
-  Currently uses no database to store products, instead are stored in memory in a Set.
-  Also uses a Controller to generate barcodes.
-  Uses features from Bootstrap framework.
-  Project generated using Lightbend Activator (now deprecated).
+- Simple Play Framework 2.4 MVC application to implement CRUD operations on a class: Product.
+- Shows how template composition is possible in Play Framework.
+- Uses dependency injection to inject configuration into controllers.
+- Implements Internationalization.
+- Currently uses no database nor ORM to store products, instead are stored in memory in a Set.
+- Also uses a Controller to generate barcodes.
+- Uses theming from Bootstrap framework.
+- Project generated using Lightbend Activator (currently deprecated).
 
 
 Controllers

@@ -101,11 +101,9 @@ class Products @Inject() (val messagesApi: MessagesApi, implicit val config: Con
           ("error" -> Messages("validation.errors")))
       },
       success = { updatedProduct =>
-        Product.findByEan(ean) match {
+        Product.update(updatedProduct) match {
           case None => BadRequest(Messages("products.edit.notfound"))
           case some =>
-            Product.remove(some.get)
-            Product.add(updatedProduct)
             val message = Messages("products.edit.success", updatedProduct.name)
             Redirect(routes.Products.show(updatedProduct.ean)).flashing("success" -> message)
         }
