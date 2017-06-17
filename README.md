@@ -5,7 +5,7 @@ CRUD MVC Application - Play Framework 2.4
 - Shows how template composition is possible in Play Framework.
 - Uses dependency injection to inject configuration into controllers.
 - Implements Internationalization.
-- Currently uses no database nor ORM to store products, instead are stored in memory in a Set.
+- This branch uses Squeryl ORM to store data in H2 Relational DB in memory.
 - Also uses a Controller to generate barcodes.
 - Uses theming from Bootstrap framework.
 - Project generated using Lightbend Activator (currently deprecated).
