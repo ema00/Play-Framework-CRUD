@@ -11,5 +11,6 @@ libraryDependencies ++= Seq(
   cache,
   ws,
   "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test,
-  "net.sf.barcode4j" % "barcode4j" % "2.0"
+  "net.sf.barcode4j" % "barcode4j" % "2.0",
+  "org.squeryl" % "squeryl_2.11" % "0.9.8"
 )
